@@ -1,0 +1,14 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_delivery_details`(in delivery_id varchar(100))
+BEGIN
+Select d.delivery_id, d.delivery_time, p1.person_name as driver, v.vehicle_plate, v.model
+FROM campus_eats_fall2020.delivery AS d 
+INNER JOIN
+ person AS p1
+ ON d.driver_id = p1.person_id 
+ AND d.delivery_id = delivery_id
+ INNER JOIN
+  vehicle as v
+  ON v.vehicle_id = d.vehicle_id
+  AND d.delivery_id = delivery_id;
+  END$$
