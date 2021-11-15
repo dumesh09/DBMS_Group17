@@ -1,0 +1,31 @@
+create table orders_menu
+(
+order_id int not null,
+restaurant_id int,
+person_id int,
+menu_id int,
+constraint fk_order FOREIGN KEY (`order_id`) REFERENCES campus_eats_fall2020.Order (`order_id`),
+constraint restaurant_order FOREIGN KEY (`restaurant_id`) REFERENCES restaurant (`restaurant_id`),
+constraint order_menu_item FOREIGN KEY (`menu_id`) REFERENCES menu_item (`menu_id`),
+constraint person_order_restaurant FOREIGN KEY (`person_id`) REFERENCES person (`person_id`),
+unique(person_id,restaurant_id,order_id)
+);
+
+drop table orders;
+create table rating
+(
+rating_id int primary key not null,
+order_id int, 
+comments varchar(2000),
+rating_food int check(0<rating_food<6),
+rating_delivery int check(0<rating_delivery<6),
+delivery_id int,
+image blob,
+constraint rating_order FOREIGN KEY (`order_id`) REFERENCES campus_eats_fall2020.Order (`order_id`)
+
+);
+
+Alter table rating
+ADD constraint rating_order FOREIGN KEY (`order_id`) REFERENCES campus_eats_fall2020.Order (`order_id`);
+
+INSERT INTO xx_BLOB(ID,IMAGE) VALUES(1,LOAD_FILE('E:/Images/jack.jpg'));
