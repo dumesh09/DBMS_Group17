@@ -1,0 +1,28 @@
+DELIMITER $$
+Create Trigger number_rest_menus
+BEFORE INSERT ON menu_item
+FOR EACH ROW
+BEGIN
+DECLARE rowcount INT;
+    
+  
+     CALL menu_check(
+     NEW.restaurant_id,0
+     );
+     
+
+END $$
+
+
+DELIMITER $$
+
+CREATE PROCEDURE menu_check(IN restaurantId INT,IN rowcount INT)
+
+BEGIN
+SELECT count(*) from menu_item where restaurant_id = restaurantId INTO rowcount;
+    IF rowcount >= 10 THEN
+    SIGNAL SQLSTATE '45000' 
+            SET MESSAGE_TEXT = 'Resturant cannot have more than 10 menu items.';
+    END IF;
+
+END$$
