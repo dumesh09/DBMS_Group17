@@ -1,0 +1,11 @@
+Team Members: 
+  Deeksha Umesh
+  Rama Suchitha Challa
+  Pavan Vooturi
+  Priyatham Kumar Gajula
+  
+Project Introduction:
+This product is about building a database system for food delivery app. Campus Eats is an on campus restaurant delivery app with a relational database in the back end.
+Each reasturant has limit to give 10 menu items. We have table rest_menu which keeps the count of number of menus. We have used trigger to keep track of it. We also have rating table to 
+store ratiing of each order.
+
