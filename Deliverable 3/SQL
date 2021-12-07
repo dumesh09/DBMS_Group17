@@ -1,0 +1,41 @@
+select min(rat.overall_rating),max(rat.overall_rating),avg(rat.overall_rating)
+from restaurant r 
+inner join campuseats_database.order o  on r.restaurant_id =o.restaurant_id
+inner join ratings rat on rat.order_id= o.order_id
+where r.restaurant_id=5;
+
+select count(o.order_id)  from restaurant r 
+inner join campuseats_database.order o  on r.restaurant_id =o.restaurant_id
+inner join ratings rat on rat.order_id= o.order_id
+inner join person p on p.person_id = o.person_id
+inner join delivery d on d.delivery_id = o.delivery_id
+where p.person_id=1 and date(d.delivery_time) between '2020-02-15' and '2020-07-19';
+
+select o.total_price  from restaurant r 
+inner join campuseats_database.order o  on r.restaurant_id =o.restaurant_id
+inner join ratings rat on rat.order_id= o.order_id
+inner join person p on p.person_id = o.person_id
+inner join delivery d on d.delivery_id = o.delivery_id
+where p.person_id=1 and date(d.delivery_time) between '2020-02-15' and '2020-07-19';
+
+select rat.overall_rating  from  campuseats_database.order o  
+inner join ratings rat on rat.order_id= o.order_id
+where o.restaurant_id=5 ;
+
+create view ratings_view as 
+select rat.overall_rating,o.restaurant_id  from  campuseats_database.order o  
+inner join ratings rat on rat.order_id= o.order_id
+group by o.restaurant_id ;
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ratings`(
+in in_restarunt_id int
+)
+BEGIN
+select min(rat.overall_rating),max(rat.overall_rating),avg(rat.overall_rating)
+from restaurant r 
+inner join campuseats_database.order o  on r.restaurant_id =o.restaurant_id
+inner join ratings rat on rat.order_id= o.order_id
+where r.restaurant_idm=in_restarunt_id;
+
+END
